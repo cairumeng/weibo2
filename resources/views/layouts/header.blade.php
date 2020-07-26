@@ -18,10 +18,14 @@
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">User info</a>
-                        <a class="dropdown-item" href="#">Info intersection</a>
+                        <a class="dropdown-item" href="#">User center</a>
+                        <a class="dropdown-item" href="{{ route('users.edit',Auth::user() ) }}">Info edit</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <form action="{{ route('sessions.destroy', Auth::user())}}" method="POST">
+                            {{method_field('DELETE')}}
+                            @csrf
+                            <button class="dropdown-item" href="">Logout</button>
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -35,7 +39,7 @@
                 <a class="nav-link" href="{{ route('help') }}">Help</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{{ route('sessions.create') }}">Login</a>
             </li>
         </ul>
     </div>
