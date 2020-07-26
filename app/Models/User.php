@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'activation_token'
     ];
 
     /**
@@ -34,4 +35,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token = Str::random(10);
+            $user->password = bcrypt($user->password);
+        });
+    }
 }

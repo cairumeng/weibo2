@@ -16,4 +16,5 @@ Route::get('/about', function () {
     return view('statics.about');
 })->name('about');
 
+Route::get('users/activate', 'UsersController@activate')->name('users.activate');
 Route::resource('users', 'UsersController');

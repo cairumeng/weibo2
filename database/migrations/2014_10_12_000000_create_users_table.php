@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('activation_token')->nullable();
             $table->boolean('activated')->default(false);
             $table->string('password');
             $table->rememberToken();
