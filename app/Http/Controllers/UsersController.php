@@ -48,4 +48,9 @@ class UsersController extends Controller
             return redirect()->route('home');
         }
     }
+
+    public function edit(User $user)
+    {
+        return view('users/edit', compact('user'));
+    }
 }

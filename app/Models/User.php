@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'activation_token'
+        'name', 'email', 'password', 'activation_token', 'avatar'
     ];
 
     /**
@@ -41,6 +41,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
+
             $user->activation_token = Str::random(10);
             $user->password = bcrypt($user->password);
         });
