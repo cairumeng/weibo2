@@ -53,4 +53,23 @@ class UsersController extends Controller
     {
         return view('users/edit', compact('user'));
     }
+
+
+    public function update(User $user, Request $request)
+
+    {
+
+        $data = [];
+        if ($request->password) {
+            $data = ['name' => $request->name, 'password' => bcrypt($request->password)];
+            $request->validate(['name' => 'required|max:255', 'password' => 'confirmed|min:6']);
+        } else {
+            $data = ['name' => $request->name];
+            $request->validate(['name' => 'required|max:255']);
+        }
+
+        $user->update($data);
+        session()->flash('success', 'You updated successfully your info!');
+        return redirect()->back();
+    }
 }
