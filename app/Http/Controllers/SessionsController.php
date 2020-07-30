@@ -29,7 +29,7 @@ class SessionsController extends Controller
             return back()->withErrors(['email' => "This email doesn't exist"]);
         }
 
-        if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($request->only(['email', 'password']), $request->remember)) {
             session()->flash('success', 'You are logged in!');
             return redirect()->route('home');
         } else {

@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Mail\AccountActivation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['create', 'show']]);
+    }
+
     public function create()
     {
         return view('users.create');
@@ -51,24 +58,39 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users/edit', compact('user'));
     }
 
+    public function uploadAvatar(User $user, Request $request)
+    {
+        $this->authorize('update', $user);
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $avatar = $request->avatar;
+        $imageName = time() . '.' . $avatar->extension();
+        Storage::putFileAs('images/avatars', $avatar, $imageName, 'public');
+        $path = Storage::url('images/avatars/' . $imageName);
+        $user->update([
+            'avatar' => $path
+        ]);
+        return $path;
+    }
 
     public function update(User $user, Request $request)
-
     {
-
-        $data = [];
+        $this->authorize('update', $user);
+        $rules = ['name' => 'required|max:255'];
+        $fileds = ['name'];
         if ($request->password) {
-            $data = ['name' => $request->name, 'password' => bcrypt($request->password)];
-            $request->validate(['name' => 'required|max:255', 'password' => 'confirmed|min:6']);
-        } else {
-            $data = ['name' => $request->name];
-            $request->validate(['name' => 'required|max:255']);
+            $rules['password'] = 'confirmed|min:6';
+            $fileds[] = 'password';
         }
 
-        $user->update($data);
+        $request->validate($rules);
+        $user->update($request->only($fileds));
         session()->flash('success', 'You updated successfully your info!');
         return redirect()->back();
     }

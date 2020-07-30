@@ -5,7 +5,7 @@
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        @if(Auth::check()){
+        @if(Auth::check())
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -29,21 +29,17 @@
                 </li>
             </ul>
         </div>
+        @else
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('help') }}">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+            </ul>
+        </div>
+        @endif
     </div>
-
-    }@else{
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('help') }}">Help</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('sessions.create') }}">Login</a>
-            </li>
-        </ul>
-    </div>
-    </div>
-    }
-    @endif
-
 </nav>
