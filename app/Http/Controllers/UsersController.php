@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Mail\AccountActivation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class UsersController extends Controller
 {
@@ -93,5 +91,11 @@ class UsersController extends Controller
         $user->update($request->only($fileds));
         session()->flash('success', 'You updated successfully your info!');
         return redirect()->back();
+    }
+
+    public function show(User $user)
+    {
+        $statuses = $user->statuses()->orderBy('created_at', 'desc')->paginate(10);
+        return view('users.show', compact('user', 'statuses'));
     }
 }
