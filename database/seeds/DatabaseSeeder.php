@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use App\Models\Status;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        Model::unguard();
+        $this->call(UsersTableSeeder::class);
+        $this->call(StatusesTableSeeder::class);
+        Model::reguard();
     }
 }
