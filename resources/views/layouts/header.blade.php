@@ -17,7 +17,7 @@
                         <img src="{{Auth::user()->avatar}}" alt="{{ Auth::user()->name}}">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">User center</a>
+                        <a class="dropdown-item" href="{{ route('users.show',Auth::user() ) }}">User center</a>
                         <a class="dropdown-item" href="{{ route('users.edit',Auth::user() ) }}">Info edit</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('sessions.destroy', Auth::user())}}" method="POST">

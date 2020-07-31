@@ -10959,3 +10959,14 @@ a.text-dark:focus {
   border: 1px solid whitesmoke;
 }
 
+.mini-avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: solid 1px;
+}
+
+.pagination {
+  justify-content: center;
+}
+
