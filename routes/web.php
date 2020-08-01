@@ -31,3 +31,4 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 
 Route::post('statuses/store', 'StatusesController@store')->name('statuses.store');
+Route::delete('statuses/{status}', 'StatusesController@destroy')->name('statuses.destroy');

@@ -16,4 +16,11 @@ class StatusesController extends Controller
         session()->flash('success', 'You have created a new post!');
         return back();
     }
+
+    public function destroy(Status $status)
+    {
+        $status->delete();
+        session()->flash('success', 'You have deleted one of your posts!');
+        return back();
+    }
 }
