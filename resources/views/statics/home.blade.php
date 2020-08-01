@@ -1,13 +1,20 @@
 @extends('layouts.default')
-
 @section('content')
-<div class="offset-md-1 col-md-10">
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, Laravel!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-success btn-lg" href="{{ route('users.create') }}" role="button">Sign up now</a>
+<div class="row">
+    <div class=" offset-md-1 col-md-6">
+        <form method="POST" action="{{ route('statuses.store')}}" class="">
+            @csrf
+            <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="content"
+                    placeholder="chat with others"></textarea>
+            </div>
+            <button class="btn btn-success float-right">Publish</button>
+        </form>
     </div>
+    <div class="col-md-4 text-center">
+        @include('shared.user_info', ['user'=>Auth::user()])
+    </div>
+
 </div>
+
 @stop

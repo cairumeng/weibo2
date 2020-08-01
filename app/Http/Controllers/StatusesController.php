@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StatusesController extends Controller
 {
-    public function show(User $user)
+    public function store(Request $request)
     {
+        $user_id = Auth::user()->id;
+        Status::create(['content' => $request->content, 'user_id' => $user_id]);
+        session()->flash('success', 'You have created a new post!');
+        return back();
     }
 }
