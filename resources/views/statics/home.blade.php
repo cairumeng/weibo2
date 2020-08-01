@@ -10,10 +10,16 @@
             </div>
             <button class="btn btn-success float-right">Publish</button>
         </form>
+        <div>
+            <h1>POSTS</h1>
+            <hr>
+            @include('shared.feed',['feed_items'=>$feed_items])
+        </div>
     </div>
     <div class="col-md-4 text-center">
         @include('shared.user_info', ['user'=>Auth::user()])
     </div>
+
 
 </div>
 
