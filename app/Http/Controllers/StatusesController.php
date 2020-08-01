@@ -19,6 +19,7 @@ class StatusesController extends Controller
 
     public function destroy(Status $status)
     {
+        $this->authorize('destroy', $status);
         $status->delete();
         session()->flash('success', 'You have deleted one of your posts!');
         return back();

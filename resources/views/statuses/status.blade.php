@@ -6,7 +6,8 @@
         <h5 class="">
             <strong class=""> {{$user->name}}</strong>
             <small class="">{{$status->created_at->diffForHumans()}}</small>
-            <form method="POST" action="{{ route('statuses.destroy',$status->id) }}">
+            <form method="POST" action="{{ route('statuses.destroy',$status->id) }}"
+                onsubmit="return confirm('Are you sure to delete this post?');">
                 {{ method_field('DELETE') }}
                 @csrf
                 <button class="btn btn-sm btn-danger float-right">Delete</button>
