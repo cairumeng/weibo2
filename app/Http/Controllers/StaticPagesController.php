@@ -12,11 +12,10 @@ class StaticPagesController extends Controller
     {
         $feed_items = [];
         if (Auth::check()) {
-            $feed_items  = Status::latest()->paginate(10);
+            $feed_items  = Status::with('user')->latest()->paginate(10);
         }
         return view('statics.home', compact('feed_items'));
     }
-
 
     public function about()
     {
