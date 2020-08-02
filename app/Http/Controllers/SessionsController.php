@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest', ['only' => ['create', 'store']]);
+        $this->middleware('auth', ['only' => ['destroy']]);
+    }
+
     public function destroy()
     {
         Auth::logout();
