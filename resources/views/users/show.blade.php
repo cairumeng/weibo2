@@ -5,6 +5,7 @@
     <div class="offset-md-2 col-md-8">
         <section class="user_info text-center mb-5">
             @include('shared.user_info')
+            @include('shared.follow_state')
         </section>
         <section class="status">
             @if($statuses->count()>0)

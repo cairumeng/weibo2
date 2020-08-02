@@ -18,6 +18,7 @@
     </div>
     <div class="col-md-4 text-center">
         @include('shared.user_info', ['user'=>Auth::user()])
+        @include('shared.follow_state',['user'=>Auth::user()])
     </div>
 
 

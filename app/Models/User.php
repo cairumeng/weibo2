@@ -64,4 +64,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(Status::class);
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+    public function follow($user_ids)
+    {
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->syncWithoutDetaching($user_ids);
+    }
+
+    public function unfollow($user_id)
+    {
+        $this->followings()->detach($user_id);
+    }
+
+    public function isfollowing($user_id)
+    {
+        return $this->followings->contains($user_id);
+    }
 }

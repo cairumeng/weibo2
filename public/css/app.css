@@ -10970,3 +10970,37 @@ a.text-dark:focus {
   justify-content: center;
 }
 
+.follow-state {
+  margin-top: 20px;
+}
+
+.follow-state a {
+  color: black;
+  text-decoration: none;
+}
+
+.follow-state #followings {
+  border-right: solid 1px #eee;
+}
+
+.follow-state #followers {
+  border-right: solid 1px #eee;
+}
+
+.follow-info {
+  margin-top: 30px;
+}
+
+.follow-info img {
+  width: 80px;
+  height: 80px;
+}
+
+.follow-info span {
+  font-size: 1rem;
+}
+
+.follow-info form {
+  margin-left: 10px;
+}
+
