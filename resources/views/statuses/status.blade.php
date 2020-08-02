@@ -4,10 +4,11 @@
     </a>
     <div class="media-body ml-3">
         <h5 class="">
-            <a href="" class="">
-                <strong class="{{ route('users.show',$user)}}"> {{$user->name}}</strong>
+            <a href="{{ route('users.show',$user)}}" class="">
+                <strong>{{$user->name}}</strong>
             </a>
             <small class="">{{$status->created_at->diffForHumans()}}</small>
+            @if (Auth::check())
             @if($user->id === Auth::user()->id)
             @can('destroy', $status)
             <form method="POST" action="{{ route('statuses.destroy',$status->id) }}"
@@ -18,7 +19,6 @@
             </form>
             @endcan
             @else
-
             @if(Auth::user()->isfollowing($user->id))
             <form method="POST" action="{{route('followers.destroy',$user)}}" class="d-inline">
                 @csrf
@@ -31,7 +31,7 @@
                 @csrf
                 <button class="btn btn-sm btn-danger float-right">Follow</button>
             </form>
-
+            @endif
             @endif
             @endif
         </h5>

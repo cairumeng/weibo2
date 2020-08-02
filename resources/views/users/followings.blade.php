@@ -13,6 +13,7 @@
         </a>
     </div>
     <div class="col-md-1">
+        @if(Auth::check())
         @if($user->isfollowing($following->id))
         <form method="POST" action="{{route('followers.destroy', $following)}}" class="d-inline">
             @csrf
@@ -25,11 +26,12 @@
             <button class="btn btn-danger">follow</button>
         </form>
         @endif
+        @endif
     </div>
 </div>
 @endforeach
 <div class="">
-    {{ $followers->links() }}
+    {{ $followings->links() }}
 </div>
 
 @stop

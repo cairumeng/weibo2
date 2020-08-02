@@ -9,13 +9,14 @@
         <div class="card-body">
             <form action="{{ route('password.resetPassword') }}" method="POST">
                 @csrf
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
-                </div>
+                <input type="hidden" name="email" value="{{ request('email') }}">
+                <input type="hidden" name="token" value="{{ request('token') }}">
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control" type="password" id="password" name="password">
+                    @if($errors->has('password'))
+                    <div class="text-danger">{{$errors->first('password')}}</div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">Password Confirmation</label>

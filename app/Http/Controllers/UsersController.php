@@ -13,7 +13,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['create', 'show']]);
+        $this->middleware('auth', ['except' => ['create', 'show', 'followings', 'followers']]);
     }
 
     public function create()

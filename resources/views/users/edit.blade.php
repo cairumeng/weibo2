@@ -16,15 +16,25 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" type="text" id="name" name="name" value="{{ $user->name}}">
+                    @if($errors->has('name'))
+                    <div class="text-danger">{{$errors->first('name')}}</div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input class="form-control" type="email" id="email" name="email" value="{{ $user->email }}"
                         disabled>
+                    @if($errors->has('email'))
+                    <div class="text-danger">{{$errors->first('email')}}</div>
+                    @endif
+
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control" type="password" id="password" name="password">
+                    @if($errors->has('password'))
+                    <div class="text-danger">{{$errors->first('password')}}</div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">Password Confirmation</label>
