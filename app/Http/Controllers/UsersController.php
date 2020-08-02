@@ -101,13 +101,13 @@ class UsersController extends Controller
 
     public function followers(User $user)
     {
-        $followers = $user->followers;
+        $followers = $user->followers()->paginate(10);
         return view('users.followers', compact('user', 'followers'));
     }
 
     public function followings(User $user)
     {
-        $followings = $user->followings;
+        $followings = $user->followings()->paginate(10);
         return view('users.followings', compact('user', 'followings'));
     }
 }

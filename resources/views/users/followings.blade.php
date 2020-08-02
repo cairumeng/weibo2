@@ -5,20 +5,31 @@
 @foreach ($followings as $following)
 <div class="follow-info row">
     <div class="col-md-5">
-        <img src="{{$following->avatar}}" alt="{{$following->name}}">
-        <span>
-            {{$following->name}}
-        </span>
+        <a href="{{ route('users.show', $following)}}">
+            <img src="{{$following->avatar}}" alt="{{$following->name}}">
+            <span>
+                {{$following->name}}
+            </span>
+        </a>
     </div>
     <div class="col-md-1">
-        <form action="" class="d-inline">
-            @if($following->isfollowing($user->id))
-            <button class="btn btn-danger">Unfollow</button>
-            @else
-            <button class="btn btn-danger">Follow</button>
-            @endif
+        @if($user->isfollowing($following->id))
+        <form method="POST" action="{{route('followers.destroy', $following)}}" class="d-inline">
+            @csrf
+            {{method_field('DELETE')}}
+            <button class="btn btn-success">unfollow</button>
         </form>
+        @else
+        <form method="POST" action="{{route('followers.store', $following)}}" class="d-inline">
+            @csrf
+            <button class="btn btn-danger">follow</button>
+        </form>
+        @endif
     </div>
 </div>
 @endforeach
+<div class="">
+    {{ $followers->links() }}
+</div>
+
 @stop
